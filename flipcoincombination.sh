@@ -8,13 +8,13 @@ else
 	echo "Tails"
 fi
 declare -A coinDictionary
-#coinDictionary[Heads]=0
-#coinDictionary[Tails]=0
+coinDictionary[H]=0
+coinDictionary[T]=0
 
-#coinDictionary[HH]=0
-#coinDictionary[HT]=0
-#coinDictionary[TH]=0
-#coinDictionary[TT]=0
+coinDictionary[HH]=0
+coinDictionary[HT]=0
+coinDictionary[TH]=0
+coinDictionary[TT]=0
 coinDictionary[HHH]=0
 coinDictionary[HHT]=0
 coinDictionary[HTH]=0
@@ -24,46 +24,82 @@ coinDictionary[THT]=0
 coinDictionary[TTH]=0
 coinDictionary[TTT]=0
 
-for (( i=0 ; i<20 ; i++ ))
+for (( i=0 ; i<30 ; i++ ))
 do
-	coinFlip=$((RANDOM%2))
-
-coinFlip2=$((RANDOM%2))
-coinFlip3=$((RANDOM%2))
-	case $coinFlip$coinFlip2$coinFlip3 in		
-000)
+	coinFlip=$((RANDOM%14))
+case $coinFlip in
+		0)
 			((coinDictionary[HHH]++))
 			;;
-		001)
+1)
 			((coinDictionary[HHT]++))
 			;;
-		010)
-			((coinDictionary[HTH]++))
-			;;
-100)
+3)
 			((coinDictionary[THH]++))
 			;;
-		011)
+2)
+			((coinDictionary[HTH]++))
+			;;
+4)
 			((coinDictionary[HTT]++))
 			;;
-		101)
+5)
 			((coinDictionary[THT]++))
 			;;
-		110)
+6)
 			((coinDictionary[TTH]++))
 			;;
-		111)
+7)
 			((coinDictionary[TTT]++))
 			;;
-	esac
+8)
+			((coinDictionary[HH]++))
+			;;
+9)
+			((coinDictionary[HT]++))
+			;;
+10)
+			((coinDictionary[TH]++))
+			;;
+11)
+			((coinDictionary[TT]++))
+			;;
+12)
+			((coinDictionary[H]++))
+			;;	
+13)
+			((coinDictionary[T]++))
+			;;
+
+esac
 done
 
+i=0
+for value in `echo ${coinDictionary[@]}`
+do
+	valueArray[$i]=$value
+	((i++))
+done
+i=0
+for key in `echo ${!coinDictionary[@]}`
+do
+	keyArray[$i]=$key
+	((i++))
+done
+max=0
+maxCounter=0
+for (( counter=0 ; counter<14 ; counter++ ))
+do
+	if [ ${valueArray[$counter]} -gt $max ]
+	then
+		max=${valueArray[counter]}
+		maxCounter=$counter
+	fi
+done
+echo "The winning combination is ${keyArray[$maxCounter]} and it occured ${valueArray[$maxCounter]} times."
 
-echo "Percentage of HHH is $((${coinDictionary[HHH]}*100/20))%"
-echo "Percentage of HHT is $((${coinDictionary[HHT]}*100/20))%"
-echo "Percentage of HTH is $((${coinDictionary[HTH]}*100/20))%"
-echo "Percentage of THH is $((${coinDictionary[THH]}*100/20))%"
-echo "Percentage of HTT is $((${coinDictionary[HTT]}*100/20))%"
-echo "Percentage of THT is $((${coinDictionary[THT]}*100/20))%"
-echo "Percentage of TTH is $((${coinDictionary[TTH]}*100/20))%"
-echo "Percentage of TTT is $((${coinDictionary[TTT]}*100/20))%"
+
+
+
+
+
