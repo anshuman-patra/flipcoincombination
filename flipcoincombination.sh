@@ -97,7 +97,21 @@ do
 	fi
 done
 echo "The winning combination is ${keyArray[$maxCounter]} and it occured ${valueArray[$maxCounter]} times."
-
+echo "Heads has occured for " `awk "BEGIN{print ${coinDictionary[H]}/30*100}"` "%"
+echo "Tails has occured for " `awk "BEGIN{print ${coinDictionary[T]}/30*100}"` "%"
+echo "Heads Heads has occured for " `awk "BEGIN{print ${coinDictionary[HH]}/30*100}"` "%"
+echo "Heads Tails has occured for " `awk "BEGIN{print ${coinDictionary[HT]}/30*100}"` "%"
+echo "Tails Heads has occured for " `awk "BEGIN{print ${coinDictionary[TH]}/30*100}"` "%"
+echo "Tails Tails has occured for " `awk "BEGIN{print ${coinDictionary[TT]}/30*100}"` "%"
+echo "Heads Heads Heads has occured for " `awk "BEGIN{print ${coinDictionary[HHH]}/30*100}"` "%"
+echo "Heads Heads Tails has occured for " `awk "BEGIN{print ${coinDictionary[HHT]}/30*100}"` "%"
+echo "Heads Tails Heads has occured for " `awk "BEGIN{print ${coinDictionary[HTH]}/30*100}"` "%"
+echo "Tails Heads Heads has occured for " `awk "BEGIN{print ${coinDictionary[THH]}/30*100}"` "%"
+echo "Heads Tails Tails has occured for " `awk "BEGIN{print ${coinDictionary[HTT]}/30*100}"` "%"
+echo "Tails Heads Tails has occured for " `awk "BEGIN{print ${coinDictionary[THT]}/30*100}"` "%"
+echo "Tails Tails Heads has occured for " `awk "BEGIN{print ${coinDictionary[TTH]}/30*100}"` "%"
+echo "Tails Tails Tails has occured for " `awk "BEGIN{print ${coinDictionary[TTT]}/30*100}"` "%"
+echo "The winning combination is ${keyArray[$maxCounter]} and it occured" `awk "BEGIN{print ${valueArray[$maxCounter]}*100/30}"` "%"
 
 
 
